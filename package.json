@@ -1,0 +1,23 @@
+{
+  "name": "@root-gustavo/lena-cli-git",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx dev/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsup src/index.ts --format esm --dts",
+    "dist": "node dist/index.js"
+  },
+  "bin": {
+    "lena": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
