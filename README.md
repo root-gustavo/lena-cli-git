@@ -1,52 +1,59 @@
-# LENA IA CLI
+# Lena CLI
 
-## Comando Inicial:
+**Lena** é uma assistente de terminal para **Git** que usa **IA** para ajudar a escrever:
+
+* mensagens de **commit**
+* nomes de **branch**
+* **pull requests**
+
+Ela analisa o contexto do repositório e gera sugestões seguindo boas práticas usadas em projetos profissionais.
+
+O objetivo é reduzir o tempo gasto escrevendo mensagens de Git e manter um histórico mais consistente.
+
+---
+
+# Uso
+
 ```bash
-lena <mensagem> --<comando>
+lena <command> <mensagem>
 ```
-## Comandos:
 
-| Comando    | Descrição                         |
-| ---------- | --------------------------------- |
-| `--branch` | Gera nomes de branch              |
-| `--commit` | Gera sugestões de commit          |
-| `--pr`     | Gera título e descrição da branch |
+Exemplo:
 
-## Funcionamento Inicial:
+```bash
+lena commit "criei o login do usuario"
+```
 
-* Escrita da IA completamente em inglês
-* Quando ela gerar um nome de branch, vai perguntar se você está satisfeito: `(Y) ou (N)`
+---
 
-  * Se não estiver satisfeito, ela irá refazer a sugestão até gerar uma boa opção
-  * Se a sugestão for útil, ela será salva em `JSON`, adicionando à **memória da IA** para que aprenda e melhore futuras recomendações
-* Para `PRs`, ela vai sugerir título e descrição do pull request:
+# Comandos
 
-  * Vai detectar em qual branch você está e analisar o nome da branch
-  * Vai também verificar todos os commits do branch para aumentar a precisão da sugestão
+| Comando  | Descrição                                                      |
+| -------- | -------------------------------------------------------------- |
+| `commit` | Gera mensagem de commit com base nas alterações do repositório |
+| `branch` | Sugere um nome de branch seguindo convenções comuns            |
+| `pr`     | Gera título e descrição para um Pull Request                   |
 
-## Modelo da IA
+---
 
-* `MPT-7B-Instruct` - (light version)
-## O que ela será?
+# Como funciona
 
-* Um arquivo `.exe` gerado com `PyInstaller`
-* Armazenará a **memória da IA** em `JSON`
-* Permitirá o uso dos comandos da IA via terminal
-* Disponibilizará descrição de funcionamento com `--help`
+Cada comando analisa o contexto do repositório usando Git:
 
-## Customização de estilo de commit e branch
+* **commit** → analisa as mudanças staged
+* **branch** → usa a descrição fornecida pelo usuário
+* **pr** → analisa os commits da branch atual
 
-- Lena permitirá configurar prefixos de commit e branch, como feat/, fix/, chore/, garantindo consistência no padrão do projeto.
-- Essa funcionalidade funciona de forma similar a ferramentas que obrigam o uso de prefixos, mas integrada diretamente na IA, mantendo a flexibilidade e automação.
+A partir dessas informações, a IA gera sugestões claras e consistentes.
 
-## Memória da IA
+---
 
-* Lena mantém **memória separada em três arquivos JSON**:
+# Objetivo do projeto
 
-  * `memory_commits.json` > histórico de commits aprovados
-  * `memory_branches.json` > histórico de nomes de branch aprovados
-  * `memory_prs.json` > histórico de títulos e descrições de PR aprovados
-  
-* Cada comando carrega **apenas a memória relevante**, garantindo rapidez e eficiência.
-* Essa separação permite que Lena **aprenda de forma incremental**, mesmo em projetos com muitos commits, gerando sugestões mais precisas e consistentes.
-* Mantém os arquivos leves e organizados, facilitando manutenção e futuras melhorias.
+Lena foi criada para tornar o fluxo de trabalho com Git mais rápido e organizado, automatizando tarefas repetitivas como escrever commits, branches e pull requests.
+
+---
+
+# Status
+
+Projeto em desenvolvimento.
